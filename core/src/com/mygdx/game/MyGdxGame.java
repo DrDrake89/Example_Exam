@@ -7,14 +7,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.awt.geom.Arc2D;
+
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	public static Texture sheet;
 	public static TextureRegion background,protagonista;
+	public static float totalScreenWidth,totalScreenHeight;
 
 	@Override
 	public void create () {
+
+		totalScreenWidth = Gdx.graphics.getWidth();
+		totalScreenHeight = Gdx.graphics.getHeight();
 
 		sheet = new Texture(Gdx.files.internal("Pictures.png"));
 		sheet.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
@@ -25,20 +31,31 @@ public class MyGdxGame extends ApplicationAdapter {
 		protagonista = new TextureRegion(sheet, 181, 130, 141, 123);
 		protagonista.flip(false, true);
 
-
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 	}
 
 	@Override
 	public void render () {
+		float TotalSteps = 0;
+		float PositionX = totalScreenHeight/2;
+		float PositionY = totalScreenWidth/2;
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
 		//batch.draw(img, 0, 0);
 		batch.disableBlending();
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.enableBlending();
-		batch.draw(protagonista,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+		batch.draw(protagonista,PositionY,PositionX);
+		while(PositionY<totalScreenWidth){
+			for(TotalSteps = PositionY; TotalSteps<= totalScreenWidth; TotalSteps++){
+				System.out.println(TotalSteps);
+			}
+
+		}
+
+
+
 		batch.end();
 	}
 	
